@@ -1,12 +1,9 @@
 #include <stdio.h>
 
-
-
 int main()
 {
-	if(1) printf("salam");
-
-
+ 	 printf("salam\n");
+	 printf("its for test");
 	return 0;
 }
 
