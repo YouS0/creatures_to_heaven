@@ -2,7 +2,16 @@
 #include <math.h>
 #include <string.h>
 
+void mapprinter(char world[][20],int size){
+    for(int i=0;i<size;i++){
+        printf("|");
+        for(int j=0;j<size;j++){
 
+            printf("%c|",world[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 
 int main(){
@@ -83,17 +92,8 @@ int main(){
 
 
     
-    
+    mapprinter(world,size);
 
-
-    for(int i = 0 ; i<20 ; i++){
-        printf("|");
-        for(int j = 0 ; j<20 ; j++){
-
-            printf("%c|" , world[i][j]);
-        }
-        printf("\n");
-    }
     fgets(lines,10,readfile);
     printf("The Creature under your control : %s",lines);
 }
