@@ -9,7 +9,7 @@ int main(){
 
     FILE *readfile;
 
-    readfile = fopen("C:\\last\\C programs\\map-pahse0.txt" , "rt" );
+    readfile = fopen("C:\\creatures_to_heaven\\map-pahse0.txt" , "rt" );
     if(!readfile) printf("File did not open!");
     char lines[100];
     char world[20][20];
@@ -55,6 +55,35 @@ int main(){
         j++;
     }
     //apply heaven cordinators to final world
+    char endofline[]="===\n";
+    int k = 0;
+    while (k!=2){
+        fgets(lines , 100 ,readfile);
+        if(strcmp(lines , endofline)==0)k++;
+    }
+    int creatures_cord[200];
+    int numberOfCreatures=0;
+    fgets(lines , 100 ,readfile);
+    while(strcmp(lines,endofline)!=0){
+        numberOfCreatures = atoi(&lines[2]);
+        position = 0;
+        for(int i = 5 ; i<strlen(lines);i++){
+            if(lines[i]>='0' && lines[i]<='9') {
+                creatures_cord[position] = atoi(&lines[i]);
+                position +=1;
+                if(atoi(&lines[i])>=10)i++;
+            }
+        }
+        for(int j = 0 ; j<2*numberOfCreatures ; j++){
+            world[creatures_cord[j]][creatures_cord[j+1]] = lines[0];
+            j++;
+        }
+        fgets(lines , 100 ,readfile);
+    }
+
+
+    
+    
 
 
     for(int i = 0 ; i<20 ; i++){
@@ -65,4 +94,6 @@ int main(){
         }
         printf("\n");
     }
+    fgets(lines,10,readfile);
+    printf("The Creature under your control : %s",lines);
 }
