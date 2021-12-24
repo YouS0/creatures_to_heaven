@@ -23,7 +23,7 @@ void getPosition(int c[2], char type) {
     int steps = -1;
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
-            if (board[i][j] == 'H' && (steps == -1 || distance[i][j] < steps)) {
+            if (board[i][j] == type && (steps == -1 || distance[i][j] < steps)) {
                 unc[0] = i;
                 unc[1] = j;
                 steps = distance[i][j];
