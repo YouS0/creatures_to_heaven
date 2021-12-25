@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 
+
 void mapprinter(char world[][20],int size){
     for(int i=0;i<size;i++){
         printf("|");
@@ -13,32 +14,39 @@ void mapprinter(char world[][20],int size){
     }
 }
 
+void swap(char world[][20],int a,int b,int i,int j){
+    char temp;
+    temp=world[a][b];
+    world[a][b]=world[i][j];
+    world[i][j]=temp;
+}
 
 int main(){
 
     FILE *readfile;
 
-    readfile = fopen("C:\\creatures_to_heaven\\map-pahse0.txt" , "rt" );
+    readfile = fopen("map-phase0.txt" , "rt" );
     if(!readfile) printf("File did not open!");
     char lines[100];
     char world[20][20];
-    for(int i = 0 ; i<20 ; i++){
-        for(int j = 0 ; j<20 ; j++){
+
+    fgets(lines , 100 , readfile);
+    int size = atof(&lines[0]);
+    //input size of world
+    for(int i = 0 ; i<size ; i++){
+        for(int j = 0 ; j<size ; j++){
             world[i][j]='-';
         }
     }
     int deadend_cords[200];
     fgets(lines , 100 , readfile);
-    int size = atoi(&lines[0]);
-    //input size of world
-    fgets(lines , 100 , readfile);
-    int deadends = atoi(&lines[2]);
+    int deadends = atof(&lines[2]);
     int position = 0;
     for(int i = 5 ; i<strlen(lines) ; i++){
         if(lines[i]>='0' && lines[i]<='9') {
-            deadend_cords[position] = atoi(&lines[i]);
+            deadend_cords[position] = atof(&lines[i]);
             position +=1;
-            if(atoi(&lines[i])>=10)i++;
+            if(atof(&lines[i])>=10)i++;
         }
     }
     //get deadend cordinators
@@ -48,14 +56,14 @@ int main(){
     }
     //apply the deadends in final world cordinators
     fgets(lines , 100 , readfile);
-    int heavens = atoi(&lines[2]);
+    int heavens = atof(&lines[2]);
     int heaven_cords[100];
     position = 0;
     for(int i = 5 ; i<strlen(lines) ; i++){
         if(lines[i]>='0' && lines[i]<='9') {
-            heaven_cords[position] = atoi(&lines[i]);
+            heaven_cords[position] = atof(&lines[i]);
             position +=1;
-            if(atoi(&lines[i])>=10)i++;
+            if(atof(&lines[i])>=10)i++;
         }
     }
     //get heaven cordinators
@@ -74,13 +82,13 @@ int main(){
     int numberOfCreatures=0;
     fgets(lines , 100 ,readfile);
     while(strcmp(lines,endofline)!=0){
-        numberOfCreatures = atoi(&lines[2]);
+        numberOfCreatures = atof(&lines[2]);
         position = 0;
         for(int i = 5 ; i<strlen(lines);i++){
             if(lines[i]>='0' && lines[i]<='9') {
-                creatures_cord[position] = atoi(&lines[i]);
+                creatures_cord[position] = atof(&lines[i]);
                 position +=1;
-                if(atoi(&lines[i])>=10)i++;
+                if(atof(&lines[i])>=10)i++;
             }
         }
         for(int j = 0 ; j<2*numberOfCreatures ; j++){
@@ -93,7 +101,160 @@ int main(){
 
     
     mapprinter(world,size);
+    int ch;
+    ch=fgetc(readfile);
+    printf("The Creature under your control : %c\n",ch);
+    int panimal[20];
+    int n=0;
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
 
-    fgets(lines,10,readfile);
-    printf("The Creature under your control : %s",lines);
+            if(world[i][j]==ch){
+                panimal[n]=i;
+                panimal[n+1]=j;
+                n+=2;
+            }
+        }
+    }
+    int sw=0;
+    
+    for(;sw==0;){
+        for(int i=0;i<n&&sw==0;i+=2){
+            char direc;
+            printf("you are at position:(%d,%d)\n",panimal[i],panimal[i+1]);
+            printf("please enter your direction of movement:\n");
+            scanf(" %c",&direc);
+            if(direc=='a'){
+                
+                if(world[panimal[i]][panimal[i+1]-1]=='-'){
+                    swap(world,panimal[i],panimal[i+1],panimal[i],panimal[i+1]-1);
+                    panimal[i+1]-=1;
+                }
+                else if(world[panimal[i]][panimal[i+1]-1]=='H'){
+                    sw=1;
+                    world[panimal[i]][panimal[i+1]-1]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                     printf("\aERROR:please enter another direction\n");
+                     i-=2;
+                }
+            }
+            else if(direc=='w'){
+                if(world[panimal[i]-1][panimal[i+1]]=='-'){
+                    swap(world,panimal[i]-1,panimal[i+1],panimal[i],panimal[i+1]);
+                    panimal[i]-=1;
+                }
+                else if(world[panimal[i]-1][panimal[i+1]]=='H'){
+                    sw=1;
+                    world[panimal[i]-1][panimal[i+1]]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='d'){
+                if(world[panimal[i]][panimal[i+1]+1]=='-'){
+                    swap(world,panimal[i],panimal[i+1]+1,panimal[i],panimal[i+1]);
+                    panimal[i+1]+=1;
+                }
+                else if(world[panimal[i]][panimal[i+1]+1]=='H'){
+                    sw=1;
+                    world[panimal[i]][panimal[i+1]+1]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='x'){
+                if(world[panimal[i]+1][panimal[i+1]]=='-'){
+                    swap(world,panimal[i]+1,panimal[i+1],panimal[i],panimal[i+1]);
+                    panimal[i]+=1;
+                }
+                else if(world[panimal[i]+1][panimal[i+1]]=='H'){
+                    sw=1;
+                    world[panimal[i]+1][panimal[i+1]]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='q'){
+                if(world[panimal[i]-1][panimal[i+1]-1]=='-'){
+                    swap(world,panimal[i]-1,panimal[i+1]-1,panimal[i],panimal[i+1]);
+                    panimal[i]-=1;
+                    panimal[i+1]-=1;
+                }
+                else if(world[panimal[i]-1][panimal[i+1]-1]=='H'){
+                    sw=1;
+                    world[panimal[i]-1][panimal[i+1]-1]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='e'){
+                if(world[panimal[i]-1][panimal[i+1]+1]=='-'){
+                    swap(world,panimal[i]-1,panimal[i+1]+1,panimal[i],panimal[i+1]);
+                    panimal[i]-=1;
+                    panimal[i+1]+=1;
+                }
+                else if(world[panimal[i]-1][panimal[i+1]+1]=='H'){
+                    sw=1;
+                    world[panimal[i]-1][panimal[i+1]+1]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='c'){
+                if(world[panimal[i]+1][panimal[i+1]+1]=='-'){
+                    swap(world,panimal[i]+1,panimal[i+1]+1,panimal[i],panimal[i+1]);
+                    panimal[i]+=1;
+                    panimal[i+1]+=1;
+                }
+                else if(world[panimal[i]+1][panimal[i+1]+1]=='H'){
+                    sw=1;
+                    world[panimal[i]+1][panimal[i+1]+1]=world[panimal[i]][panimal[i+1]];
+                    world[panimal[i]][panimal[i+1]]='-';
+                }
+                else{
+                    printf("\aERROR:please enter another direction\n");
+                    i-=2;
+                }
+            }
+            else if(direc=='z'){
+                    if(world[panimal[i]+1][panimal[i+1]-1]=='-'){
+                        swap(world,panimal[i]+1,panimal[i+1]-1,panimal[i],panimal[i+1]);
+                        panimal[i]+=1;
+                        panimal[i+1]-=1;
+                    }
+                    else if(world[panimal[i]+1][panimal[i+1]-1]=='H'){
+                        sw=1;
+                        world[panimal[i]+1][panimal[i+1]-1]=world[panimal[i]][panimal[i+1]];
+                        world[panimal[i]][panimal[i+1]]='-';
+                    }
+                    else{
+                        printf("\aERROR:please enter another direction\n");
+                        i-=2;
+                    }
+                }
+            else{
+                printf("\athis direction isn't available!!\n");
+                i-=2;
+            }
+            mapprinter(world,size);
+        }
+        if(sw==1) printf("creature %c won!!!",ch);
+    }
 }
