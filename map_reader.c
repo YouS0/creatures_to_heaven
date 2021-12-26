@@ -258,11 +258,10 @@ int theNearest(int c[2], char type) {
             int dx = c[0] - i;
             if (dx < 0) dx *= -1;
             int dy = c[1] - j;
-            if (dy < 0) dx *= -1;
+            if (dy < 0) dy *= -1;
             
-            distance[i][j] = dx + dy;
-            
-            if (distance[i][j] < 0) distance[i][j] *= -1;
+            if (dx > dy) distance[i][j] = dx;
+            else distance[i][j] = dy;
         }
     }
     
