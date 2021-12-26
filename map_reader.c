@@ -259,9 +259,31 @@ void movewithkey( int n , int animaltype[150] , char direc , int i){
 
 
 int unc[2];
+<<<<<<< HEAD
 void theNearest(int x , int y, char type) {
     int min = 400;
     int distance , dx , dy;
+=======
+int theNearest(int c[2], char type) {
+    // c means controllable
+    // unc means uncontrollable or the thing we're looking for
+    
+    
+    //--- make distance array
+    int distance[20][20];
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
+            int dx = c[0] - i;
+            if (dx < 0) dx *= -1;
+            int dy = c[1] - j;
+            if (dy < 0) dy *= -1;
+            
+            if (dx > dy) distance[i][j] = dx;
+            else distance[i][j] = dy;
+        }
+    }
+    
+>>>>>>> 7a752060e2a5ec0472dd2334c18b0af658124b90
     //--- find the nearest
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
