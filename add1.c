@@ -5,8 +5,8 @@ struct uncAnimal {
     int energy;
 };
 
-int uncAnimalsCount = 0;
 struct uncAnimal uncAnimals[20];
+int uncAnimalsCount = 0;
 
 void addUncAnimal(char _name, int x_position, int y_position, int x_destinition, int y_destinition, int _energy) {
     struct uncAnimal theUncAnimal = {_name, {x_position, y_position}, {x_destinition, y_destinition}, _energy};
