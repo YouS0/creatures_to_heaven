@@ -360,7 +360,7 @@ int main(){
     FILE *readfile;
     int c[2];
 
-    readfile = fopen("C:\\creatures_to_heaven\\map-phase0.txt" , "rt" );
+    readfile = fopen("map-phase0.txt" , "rt" );
     if(!readfile || !log) printf("File did not open!");
     mapreader(readfile);
     for(int i=0;i<size;i++){
