@@ -19,6 +19,10 @@ char winner;
 int sw = 0;
 char direc;
 char animal;
+int unc[2];
+int moved = 1;
+char moving_creature;
+char move_direction;
 void sleep(unsigned int mseconds) {
     clock_t goal = mseconds + clock();
     while (goal > clock());
@@ -95,6 +99,7 @@ void mapreader(FILE *readfile){
 
 
 void mapprinter(char world[][20],int size){
+    printf("\n");
     for(int i=0;i<size;i++){
         printf("|");
         for(int j=0;j<size;j++){
@@ -103,6 +108,7 @@ void mapprinter(char world[][20],int size){
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 void swap(char world[][20],int a,int b,int i,int j){
@@ -116,8 +122,9 @@ void swap(char world[][20],int a,int b,int i,int j){
 
 
 void movewithkey( int n , int animaltype[150] , char direc , int* i){
+    moved = 1;
     if(direc=='a'){
-        
+        move_direction = 'a';
         if(world[animaltype[*i]][animaltype[*i+1]-1]=='-'){
             swap(world,animaltype[*i],animaltype[*i+1],animaltype[*i],animaltype[*i+1]-1);
             animaltype[*i+1]-=1;
@@ -129,11 +136,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='w'){
+        move_direction = 'w';
         if(world[animaltype[*i]-1][animaltype[*i+1]]=='-'){
             swap(world,animaltype[*i]-1,animaltype[*i+1],animaltype[*i],animaltype[*i+1]);
             animaltype[*i]-=1;
@@ -145,11 +154,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='d'){
+        move_direction = 'd';
         if(world[animaltype[*i]][animaltype[*i+1]+1]=='-'){
             swap(world,animaltype[*i],animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
             animaltype[*i+1]+=1;
@@ -161,11 +172,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='x'){
+        move_direction = 'x';
         if(world[animaltype[*i]+1][animaltype[*i+1]]=='-'){
             swap(world,animaltype[*i]+1,animaltype[*i+1],animaltype[*i],animaltype[*i+1]);
             animaltype[*i]+=1;
@@ -177,11 +190,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='q'){
+        move_direction = 'q';
         if(world[animaltype[*i]-1][animaltype[*i+1]-1]=='-'){
             swap(world,animaltype[*i]-1,animaltype[*i+1]-1,animaltype[*i],animaltype[*i+1]);
             animaltype[*i]-=1;
@@ -194,11 +209,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='e'){
+        move_direction = 'e';
         if(world[animaltype[*i]-1][animaltype[*i+1]+1]=='-'){
             swap(world,animaltype[*i]-1,animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
             animaltype[*i]-=1;
@@ -211,11 +228,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='c'){
+        move_direction = 'c';
         if(world[animaltype[*i]+1][animaltype[*i+1]+1]=='-'){
             swap(world,animaltype[*i]+1,animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
             animaltype[*i]+=1;
@@ -228,11 +247,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
             world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
+            moved = 0;
             printf("\aERROR:please enter another direction\n");
             *i-=2;
         }
     }
     else if(direc=='z'){
+        move_direction = 'z';
             if(world[animaltype[*i]+1][animaltype[*i+1]-1]=='-'){
                 swap(world,animaltype[*i]+1,animaltype[*i+1]-1,animaltype[*i],animaltype[*i+1]);
                 animaltype[*i]+=1;
@@ -245,11 +266,13 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
                 world[animaltype[*i]][animaltype[*i+1]]='-';
             }
             else{
+                moved = 0;
                 printf("\aERROR:please enter another direction\n");
                 *i-=2;
             }
         }
     else{
+        moved = 0;
         printf("\athis direction isn't available!!\n");
         *i-=2;
     }
@@ -258,7 +281,7 @@ void movewithkey( int n , int animaltype[150] , char direc , int* i){
 }
 
 
-int unc[2];
+
 void theNearest(int x , int y, char type) {
     int min = 400;
     int distance , dx , dy;
@@ -332,13 +355,25 @@ void moveunc(int x , int y , int number , int j){
 
 int main(){
 
+    FILE *log;
+    log = fopen("game-log.txt" , "wt");
     FILE *readfile;
     int c[2];
 
     readfile = fopen("C:\\creatures_to_heaven\\map-phase0.txt" , "rt" );
-    if(!readfile) printf("File did not open!");
+    if(!readfile || !log) printf("File did not open!");
     mapreader(readfile);
+    for(int i=0;i<size;i++){
+        fprintf(log , "|");
+        for(int j=0;j<size;j++){
+            fprintf(log ,"%c|",world[i][j]);
+        }
+        fprintf(log , "\n");
+    }
+    fprintf(log , "\n");
     mapprinter(world,size);
+
+    printf("\n");
     int ch;
     int n=0;
     int number = 0;
@@ -374,10 +409,19 @@ int main(){
             animal = ch;
             
             printf("you are at position:(%d,%d)\n",panimal[i],panimal[i+1]);
+            int x1 = panimal[i];
+            int y1 = panimal[i+1];
+            moving_creature = world[x1][y1];
             printf("please enter your direction of movement:\n");
             scanf(" %c" , &direc);
             movewithkey( n , panimal , direc , &i );
-            if(sw==1) printf("gg , wp all -> creature %c won!!!",winner);
+            if(moved == 1){
+                fprintf(log , "moving creature %c in (%d,%d) into %c direction\n" , moving_creature, x1 , y1 , move_direction );
+            }
+            if(sw==1) {
+                printf("gg , wp all -> creature %c won!!!",winner);
+                fprintf( log, "gg , wp all -> creature %c won!!!",winner);
+            }
         }
         int j = 0;
         while(j<number && sw ==0){
@@ -385,11 +429,15 @@ int main(){
             int x = noncanimals[j];
             int y = noncanimals[j+1];
             animal = world[x][y];
-            printf("moving creature in position(%d,%d) to (%d,%d)\n" , x , y , unc[0] , unc[1]);
+            printf("moving creature %c in position(%d,%d) to (%d,%d) : \n" , world[x][y] ,x , y , unc[0] , unc[1]);
             moveunc(x , y , number , j);
-            if(sw==1) printf("gg , wp all -> creature %c won!!!",winner);
+            fprintf(log , "moving creature %c in (%d,%d) into %c direction\n" , animal ,x , y , move_direction );
+            if(sw==1) {
+                printf("gg , wp all -> creature %c won!!!",winner);
+                fprintf( log, "gg , wp all -> creature %c won!!!",winner);
+            }
             j += 2;
-            sleep(2000);
+            sleep(1000);
             
 
         }
