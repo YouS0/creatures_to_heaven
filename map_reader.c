@@ -115,145 +115,145 @@ void swap(char world[][20],int a,int b,int i,int j){
 
 
 
-void movewithkey( int n , int animaltype[150] , char direc , int i){
-
+void movewithkey( int n , int animaltype[150] , char direc , int* i){
     if(direc=='a'){
         
-        if(world[animaltype[i]][animaltype[i+1]-1]=='-'){
-            swap(world,animaltype[i],animaltype[i+1],animaltype[i],animaltype[i+1]-1);
-            animaltype[i+1]-=1;
+        if(world[animaltype[*i]][animaltype[*i+1]-1]=='-'){
+            swap(world,animaltype[*i],animaltype[*i+1],animaltype[*i],animaltype[*i+1]-1);
+            animaltype[*i+1]-=1;
         }
-        else if(world[animaltype[i]][animaltype[i+1]-1]=='H'){
+        else if(world[animaltype[*i]][animaltype[*i+1]-1]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]][animaltype[i+1]-1]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]][animaltype[*i+1]-1]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
-             printf("\aERROR:please enter another direction\n");
-             i-=2;
+            printf("\aERROR:please enter another direction\n");
+            *i-=2;
         }
     }
     else if(direc=='w'){
-        if(world[animaltype[i]-1][animaltype[i+1]]=='-'){
-            swap(world,animaltype[i]-1,animaltype[i+1],animaltype[i],animaltype[i+1]);
-            animaltype[i]-=1;
+        if(world[animaltype[*i]-1][animaltype[*i+1]]=='-'){
+            swap(world,animaltype[*i]-1,animaltype[*i+1],animaltype[*i],animaltype[*i+1]);
+            animaltype[*i]-=1;
         }
-        else if(world[animaltype[i]-1][animaltype[i+1]]=='H'){
+        else if(world[animaltype[*i]-1][animaltype[*i+1]]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]-1][animaltype[i+1]]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]-1][animaltype[*i+1]]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='d'){
-        if(world[animaltype[i]][animaltype[i+1]+1]=='-'){
-            swap(world,animaltype[i],animaltype[i+1]+1,animaltype[i],animaltype[i+1]);
-            animaltype[i+1]+=1;
+        if(world[animaltype[*i]][animaltype[*i+1]+1]=='-'){
+            swap(world,animaltype[*i],animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
+            animaltype[*i+1]+=1;
         }
-        else if(world[animaltype[i]][animaltype[i+1]+1]=='H'){
+        else if(world[animaltype[*i]][animaltype[*i+1]+1]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]][animaltype[i+1]+1]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]][animaltype[*i+1]+1]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='x'){
-        if(world[animaltype[i]+1][animaltype[i+1]]=='-'){
-            swap(world,animaltype[i]+1,animaltype[i+1],animaltype[i],animaltype[i+1]);
-            animaltype[i]+=1;
+        if(world[animaltype[*i]+1][animaltype[*i+1]]=='-'){
+            swap(world,animaltype[*i]+1,animaltype[*i+1],animaltype[*i],animaltype[*i+1]);
+            animaltype[*i]+=1;
         }
-        else if(world[animaltype[i]+1][animaltype[i+1]]=='H'){
+        else if(world[animaltype[*i]+1][animaltype[*i+1]]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]+1][animaltype[i+1]]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]+1][animaltype[*i+1]]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='q'){
-        if(world[animaltype[i]-1][animaltype[i+1]-1]=='-'){
-            swap(world,animaltype[i]-1,animaltype[i+1]-1,animaltype[i],animaltype[i+1]);
-            animaltype[i]-=1;
-            animaltype[i+1]-=1;
+        if(world[animaltype[*i]-1][animaltype[*i+1]-1]=='-'){
+            swap(world,animaltype[*i]-1,animaltype[*i+1]-1,animaltype[*i],animaltype[*i+1]);
+            animaltype[*i]-=1;
+            animaltype[*i+1]-=1;
         }
-        else if(world[animaltype[i]-1][animaltype[i+1]-1]=='H'){
+        else if(world[animaltype[*i]-1][animaltype[*i+1]-1]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]-1][animaltype[i+1]-1]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]-1][animaltype[*i+1]-1]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='e'){
-        if(world[animaltype[i]-1][animaltype[i+1]+1]=='-'){
-            swap(world,animaltype[i]-1,animaltype[i+1]+1,animaltype[i],animaltype[i+1]);
-            animaltype[i]-=1;
-            animaltype[i+1]+=1;
+        if(world[animaltype[*i]-1][animaltype[*i+1]+1]=='-'){
+            swap(world,animaltype[*i]-1,animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
+            animaltype[*i]-=1;
+            animaltype[*i+1]+=1;
         }
-        else if(world[animaltype[i]-1][animaltype[i+1]+1]=='H'){
+        else if(world[animaltype[*i]-1][animaltype[*i+1]+1]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]-1][animaltype[i+1]+1]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]-1][animaltype[*i+1]+1]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='c'){
-        if(world[animaltype[i]+1][animaltype[i+1]+1]=='-'){
-            swap(world,animaltype[i]+1,animaltype[i+1]+1,animaltype[i],animaltype[i+1]);
-            animaltype[i]+=1;
-            animaltype[i+1]+=1;
+        if(world[animaltype[*i]+1][animaltype[*i+1]+1]=='-'){
+            swap(world,animaltype[*i]+1,animaltype[*i+1]+1,animaltype[*i],animaltype[*i+1]);
+            animaltype[*i]+=1;
+            animaltype[*i+1]+=1;
         }
-        else if(world[animaltype[i]+1][animaltype[i+1]+1]=='H'){
+        else if(world[animaltype[*i]+1][animaltype[*i+1]+1]=='H'){
             winner = animal;
             sw=1;
-            world[animaltype[i]+1][animaltype[i+1]+1]=world[animaltype[i]][animaltype[i+1]];
-            world[animaltype[i]][animaltype[i+1]]='-';
+            world[animaltype[*i]+1][animaltype[*i+1]+1]=world[animaltype[*i]][animaltype[*i+1]];
+            world[animaltype[*i]][animaltype[*i+1]]='-';
         }
         else{
             printf("\aERROR:please enter another direction\n");
-            i-=2;
+            *i-=2;
         }
     }
     else if(direc=='z'){
-            if(world[animaltype[i]+1][animaltype[i+1]-1]=='-'){
-                swap(world,animaltype[i]+1,animaltype[i+1]-1,animaltype[i],animaltype[i+1]);
-                animaltype[i]+=1;
-                animaltype[i+1]-=1;
+            if(world[animaltype[*i]+1][animaltype[*i+1]-1]=='-'){
+                swap(world,animaltype[*i]+1,animaltype[*i+1]-1,animaltype[*i],animaltype[*i+1]);
+                animaltype[*i]+=1;
+                animaltype[*i+1]-=1;
             }
-            else if(world[animaltype[i]+1][animaltype[i+1]-1]=='H'){
+            else if(world[animaltype[*i]+1][animaltype[*i+1]-1]=='H'){
                 winner = animal;
                 sw=1;
-                world[animaltype[i]+1][animaltype[i+1]-1]=world[animaltype[i]][animaltype[i+1]];
-                world[animaltype[i]][animaltype[i+1]]='-';
+                world[animaltype[*i]+1][animaltype[*i+1]-1]=world[animaltype[*i]][animaltype[*i+1]];
+                world[animaltype[*i]][animaltype[*i+1]]='-';
             }
             else{
                 printf("\aERROR:please enter another direction\n");
-                i-=2;
+                *i-=2;
             }
         }
     else{
         printf("\athis direction isn't available!!\n");
-        i-=2;
+        *i-=2;
     }
+    *i += 2;
     mapprinter(world,size);
 }
 
@@ -282,50 +282,50 @@ void theNearest(int x , int y, char type) {
 void moveunc(int x , int y , int number , int j){
     if(x>unc[0]){
         if(y>unc[1]){
-            if(world[x-1][y-1] == '-' || world[x-1][y-1] == 'H')movewithkey(number , noncanimals , 'q' , j);
-            else if (world[x-1][y] == '-'|| world[x-1][y] == 'H') movewithkey(number , noncanimals , 'a' , j);
-            else if ((world[x][y-1] == '-'|| world[x][y-1] == 'H')) movewithkey(number , noncanimals , 'x' , j);
+            if(world[x-1][y-1] == '-' || world[x-1][y-1] == 'H')movewithkey(number , noncanimals , 'q' , &j);
+            else if (world[x-1][y] == '-'|| world[x-1][y] == 'H') movewithkey(number , noncanimals , 'a' , &j);
+            else if ((world[x][y-1] == '-'|| world[x][y-1] == 'H')) movewithkey(number , noncanimals , 'x' , &j);
         }
         if(y<unc[1]){
-            if(world[x-1][y+1] == '-'|| world[x-1][y+1] == 'H')movewithkey(number , noncanimals , 'e' , j);
-            else if(world[x][y+1] == '-'|| world[x][y+1] == 'H')movewithkey(number , noncanimals , 'd' , j);
-            else if(world[x-1][y] == '-'|| world[x-1][y] == 'H')movewithkey(number , noncanimals , 'w' , j);
+            if(world[x-1][y+1] == '-'|| world[x-1][y+1] == 'H')movewithkey(number , noncanimals , 'e' , &j);
+            else if(world[x][y+1] == '-'|| world[x][y+1] == 'H')movewithkey(number , noncanimals , 'd' , &j);
+            else if(world[x-1][y] == '-'|| world[x-1][y] == 'H')movewithkey(number , noncanimals , 'w' , &j);
         }
         if(y==unc[1]){
-            if(world[x-1][y] == '-'|| world[x-1][y] == 'H')movewithkey(number , noncanimals , 'w' , j);
-            else if(world[x-1][y+1]=='-'|| world[x-1][y+1] == 'H') movewithkey(number , noncanimals , 'e' , j);
-            else if(world[x+1][y+1]=='-'|| world[x+1][y+1] == 'H') movewithkey(number , noncanimals , 'c' , j);
+            if(world[x-1][y] == '-'|| world[x-1][y] == 'H')movewithkey(number , noncanimals , 'w' , &j);
+            else if(world[x-1][y+1]=='-'|| world[x-1][y+1] == 'H') movewithkey(number , noncanimals , 'e' , &j);
+            else if(world[x+1][y+1]=='-'|| world[x+1][y+1] == 'H') movewithkey(number , noncanimals , 'c' , &j);
         }
     }
     if(x<unc[0]){
         if(y>unc[1]){
-            if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H' )movewithkey(number , noncanimals , 'z' , j);
-            else if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , j);
-            else if(world[x][y-1] == '-'|| world[x][y-1] == 'H')movewithkey(number , noncanimals , 'a' , j);
+            if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H' )movewithkey(number , noncanimals , 'z' , &j);
+            else if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , &j);
+            else if(world[x][y-1] == '-'|| world[x][y-1] == 'H')movewithkey(number , noncanimals , 'a' , &j);
         
         }
         if(y<unc[1]){
-            if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , j);
-            else if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , j);
-            else if(world[x][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'd' , j);
+            if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , &j);
+            else if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , &j);
+            else if(world[x][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'd' , &j);
         }
         if(y==unc[1]){
-            if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , j);
-            else if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H')movewithkey(number , noncanimals , 'z' , j);
-            else if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , j);
+            if(world[x+1][y] == '-'|| world[x+1][y] == 'H')movewithkey(number , noncanimals , 'x' , &j);
+            else if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H')movewithkey(number , noncanimals , 'z' , &j);
+            else if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , &j);
         }
     }
     if(x==unc[0]){
         if(y>unc[1]){
-            if(world[x][y-1] == '-'|| world[x][y-1] == 'H')movewithkey(number , noncanimals , 'a' , j);
-            else if(world[x-1][y-1] == '-'|| world[x-1][y+1] == 'H')movewithkey(number , noncanimals , 'q' , j);
-            else if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H')movewithkey(number , noncanimals , 'z' , j);
+            if(world[x][y-1] == '-'|| world[x][y-1] == 'H')movewithkey(number , noncanimals , 'a' , &j);
+            else if(world[x-1][y-1] == '-'|| world[x-1][y+1] == 'H')movewithkey(number , noncanimals , 'q' , &j);
+            else if(world[x+1][y-1] == '-'|| world[x+1][y-1] == 'H')movewithkey(number , noncanimals , 'z' , &j);
         
         }
         if(y<unc[1]){
-            if(world[x][y+1] == '-'|| world[x][y+1] == 'H')movewithkey(number , noncanimals , 'd' , j);
-            else if(world[x-1][y+1]=='-'|| world[x-1][y+1] == 'H') movewithkey(number , noncanimals , 'e' , j);
-            else if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , j);
+            if(world[x][y+1] == '-'|| world[x][y+1] == 'H')movewithkey(number , noncanimals , 'd' , &j);
+            else if(world[x-1][y+1]=='-'|| world[x-1][y+1] == 'H') movewithkey(number , noncanimals , 'e' , &j);
+            else if(world[x+1][y+1] == '-'|| world[x+1][y+1] == 'H')movewithkey(number , noncanimals , 'c' , &j);
         }
     }
 }
@@ -376,9 +376,8 @@ int main(){
             printf("you are at position:(%d,%d)\n",panimal[i],panimal[i+1]);
             printf("please enter your direction of movement:\n");
             scanf(" %c" , &direc);
-            movewithkey( n , panimal , direc , i );
+            movewithkey( n , panimal , direc , &i );
             if(sw==1) printf("gg , wp all -> creature %c won!!!",winner);
-            i+=2;
         }
         int j = 0;
         while(j<number && sw ==0){
