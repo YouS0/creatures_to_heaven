@@ -77,7 +77,7 @@ int main()
     
     uncDetails(b);
     
-    printf("%d %d %d %d %d", movingEnergy, moveNumber, multiplyEnergy, attackPower, deffencePower);
+    printf("%d %d %d %d %d", movingEnergyTemp, moveNumberTemp, multiplyEnergyTemp, attackPowerTemp, deffencePowerTemp);
 
     return 0;
 }
