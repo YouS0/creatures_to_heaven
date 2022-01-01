@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-int movingEnergy;
-int moveNumber;
-int multiplyEnergy;
-int attackPower;
-int deffencePower;
+int movingEnergyTemp;
+int moveNumberTemp;
+int multiplyEnergyTemp;
+int attackPowerTemp;
+int deffencePowerTemp;
 void uncDetails(char gene[30]) {
     int i = 0;
     char temp[4];
@@ -22,7 +22,7 @@ void uncDetails(char gene[30]) {
         tempCount++;
         i++;
     }
-    movingEnergy = atoi(temp);
+    movingEnergyTemp = atoi(temp);
     tempCount = 0;
     tempClear();
     i++;
@@ -33,7 +33,7 @@ void uncDetails(char gene[30]) {
         tempCount++;
         i++;
     }
-    moveNumber = atoi(temp);
+    moveNumberTemp = atoi(temp);
     tempCount = 0;
     tempClear();
     i++;
@@ -44,7 +44,7 @@ void uncDetails(char gene[30]) {
         tempCount++;
         i++;
     }
-    multiplyEnergy = atoi(temp);
+    multiplyEnergyTemp = atoi(temp);
     tempCount = 0;
     tempClear();
     i++;
@@ -55,7 +55,7 @@ void uncDetails(char gene[30]) {
         tempCount++;
         i++;
     }
-    attackPower = atoi(temp);
+    attackPowerTemp = atoi(temp);
     tempCount = 0;
     tempClear();
     i++;
@@ -66,7 +66,7 @@ void uncDetails(char gene[30]) {
         tempCount++;
         i++;
     }
-    deffencePower = atoi(temp);
+    deffencePowerTemp = atoi(temp);
 }
 
 int main()
